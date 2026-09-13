@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1-5</title>
+    <link rel="stylesheet" href="../../styles/lab1.css">
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+    <div>
+        <h3>Завдання 1</h3>
+
+        <p>Це звичайний HTML абзац.</p>
+
+        <p>Знову звичайний HTML абзац.</p>
+        <form>
+            <input type="button" value="Click me" onClick="alert('Я народився 12.05.2008 року в місті Івано-Франківськ')">
+        </form>
+    </div>
+
+    <div>
+        <h3>Завдання 2</h3>
+
+        <button onclick="calculateTaskTwo()">Виконати розрахунок</button>
+    </div>
+
+    <div>
+        <h3>Завдання 3</h3>
+
+        <form>
+            <input type="text" placeholder="onChange" onchange="inputOnChange()">
+            <input type="text" id="on-change-input">
+        </form>
+
+        <form>
+            <button onfocus="buttonOnFocus()" type="button">onFocus</button>
+            <p id="on-focus-text"></p>
+        </form>
+    </div>
+
+    <div>
+        <h3>Завдання 4</h3>
+
+        <input type="text" id="x-input-4" placeholder="Введіть х">
+        <input type="text" id="y-input-4" placeholder="Введіть y">
+        <button onclick="calculateTaskFour()">Розрахувати</button>
+        <p id="task-4-result-text"></p>
+    </div>
+
+    <div>
+        <h3>Завдання 5</h3>
+
+        <input type="text" id="x-input-5" placeholder="Введіть х">
+        <input type="text" id="y-input-5" placeholder="Введіть y">
+        <button onclick="calculateTaskFive()">Розрахувати</button>
+        <p id="task-5-result-text"></p>
+    </div>
+
+    <script>
+        document.write("Привіт! Мене звати Владислав, студент групи ІПЗ-22.");
+
+        function calculateTaskTwo() {
+            const x = 5;
+            const y = 10;
+            const z = 15;
+
+            const F = x + Math.pow(y, 2) + Math.pow(z, 0.5);
+
+            alert(`Результат: ${Math.round(F, 3)}`);
+        }
+
+        function inputOnChange() {
+            document.getElementById('on-change-input').value = "Вміст поля змінений";
+        } 
+
+        function buttonOnFocus() {
+            document.getElementById('on-focus-text').innerText = "Фокус кнопки здійснено";
+        }
+
+        function calculateTaskFour() {
+            const xInput = document.getElementById('x-input-4').value;
+            const yInput = document.getElementById('y-input-4').value;
+            const resultText = document.getElementById('task-4-result-text');
+
+            const x = Number(xInput);
+            const y = Number(yInput);
+
+            if (xInput.trim() === '' || yInput.trim() === '' || isNaN(x) || isNaN(y)) {
+                resultText.innerText = 'Ви не ввели число';
+                return;
+            }
+
+            let result = 0;
+
+            if (x - 3 * y !== 2) {
+                result = x - 2 * Math.pow(y, 2);
+            } else if (x > 0) {
+                if (y === 0) {
+                    resultText.innerText = 'Помилка: ділення на нуль';
+                    return;
+                }
+                result = x - y / y;
+            } else {
+                result = 2 * Math.pow(x, 2) - 3 * y;
+            }
+
+            resultText.innerText = result;
+        }
+
+        function calculateTaskFive() {
+            const xValue = document.getElementById('x-input-4').value;
+            const yValue = document.getElementById('y-input-4').value;
+            const resultText = document.getElementById('task-5-result-text');
+
+            console.log(xValue);
+            console.log(yValue);
+            console.log(resultText);
+
+            const x = parseFloat(xValue);
+            const y = parseFloat(yValue);
+
+            if (xValue.trim() === '' || yValue.trim() === '' || isNaN(x) || isNaN(y)) {
+                resultText.innerText = 'Ви не ввели число';
+            } else if (x === 0) {
+                resultText.innerText = 'Помилка: x не може дорівнювати 0';
+            } else {
+                let sum = 0;
+
+                function factorial(n) {
+                    let res = 1;
+                    for (let k = 2; k <= n; k++) {
+                        res *= k;
+                    }
+                    return res;
+                }
+
+                for (let i = 2; i <= 4; i++) {
+                    const term = Math.pow(-1, i + 1) * ((-x + x * Math.pow(y, 2)) / (2 * x)) * factorial(i);
+                    sum += term;
+                }
+
+                resultText.innerText = sum;
+            }
+        }
+    </script>
+</body>
+</html>
