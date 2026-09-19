@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab2/lab2.css">
+</head>
+<body>
+    <a class="main-link" href="../index.html">На головну</a>
+
+    <h3>Завдання 2</h3>
+
+    <div class="calcualation-wrapper">
+        <p id="calculation-text" class="calculation-text"></p>
+        <div class="calculation-grid">
+            <button onclick="calculate('1')">1</button>
+            <button onclick="calculate('2')">2</button>
+            <button onclick="calculate('3')">3</button>
+            <button onclick="calculate('4')">4</button>
+            <button onclick="calculate('5')">5</button>
+            <button onclick="calculate('6')">6</button>
+            <button onclick="calculate('7')">7</button>
+            <button onclick="calculate('8')">8</button>
+            <button onclick="calculate('9')">9</button>
+            <button onclick="calculate('0')">0</button>
+            <button onclick="calculate('+')">+</button>
+            <button onclick="calculate('-')">-</button>
+            <button onclick="calculate('*')">*</button>
+            <button onclick="calculate('/')">/</button>
+            <button id="equals-button">=</button>
+            <button id="clear-button">Очистити</button>
+        </div>
+    </div>
+
+    <script>
+        let calculation = '';
+        let result = '';
+        const equalsButton = document.getElementById('equals-button');
+        const clearButton = document.getElementById('clear-button');
+        const calculationText = document.getElementById('calculation-text');
+
+        function calculate(value) {
+            calculation += value;
+
+            calculationText.innerText = calculation;
+        }
+
+        equalsButton.addEventListener('click', () => {
+            result = calculation;
+            calculation = '';
+            calculationText.innerText = eval(result);
+        });
+
+        clearButton.addEventListener('click', () => {
+            calculation = '';
+            calculationText.innerText = '';
+        });
+    </script>
+</body>
+</html>

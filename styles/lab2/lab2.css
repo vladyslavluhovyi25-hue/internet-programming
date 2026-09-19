@@ -1,0 +1,10 @@
+.calcualation-wrapper {
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+
+.calculation-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 80px);
+}

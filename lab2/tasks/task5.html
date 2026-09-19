@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 5</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab2/lab2.css">
+</head>
+<body>
+    <a class="main-link" href="../index.html">На головну</a>
+
+    <h3>Завдання 5</h3>
+
+    <script>
+        console.info("Інформація: Додаток успішно ініціалізовано");
+
+        console.warn("Попередження: Використовується застаріле API!");
+
+        console.error("Помилка: Не вдалося з'єднатися з сервером");
+
+        const user = {
+            id: 101,
+            name: "Владислав",
+            role: "Admin",
+            details: { age: 18, city: "ІФ" }
+        };
+
+        console.log("Дослідження console.dir");
+        console.dir(user);
+
+        const btn = document.createElement("button");
+        btn.innerText = "Натисни мене";
+        btn.className = "btn-primary";
+
+        console.log("console.log для DOM-елемента (показує HTML-структуру):", btn);
+        console.dir(btn);
+
+        console.dirxml(btn);
+
+        console.log("\nЗамір часу (console.time / console.timeEnd)");
+
+        console.time("ТестЦиклу");
+
+        let sum = 0;
+        for (let i = 0; i < 1000000; i++) {
+            sum += i;
+        }
+
+        console.timeEnd("ТестЦиклу");
+
+        console.profile("Профіль_Завантаження");
+        for (let j = 0; j < 500000; j++) {
+            Math.sqrt(j);
+        }
+        console.profileEnd("Профіль_Завантаження");
+
+        console.log("\nПеревірка умов (console.assert)");
+        let age = 16;
+
+        console.assert(age >= 18, "Користувач неповнолітній! Вік:", age); 
+
+        let score = 100;
+        console.assert(score === 100, "Цей текст НЕ з'явиться, бо умова true");
+    </script>
+</body>
+</html>

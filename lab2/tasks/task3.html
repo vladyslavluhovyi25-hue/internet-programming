@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab2/lab2.css">
+</head>
+<body>
+    <a class="main-link" href="../index.html">На головну</a>
+
+    <h3>Завдання 3</h3>
+
+    <form id="main_form">
+        <table>
+            <tr>
+                <td>Кількість строк</td>
+                <td><input type="text" id="t_str" value="5"></td>
+            </tr>
+            <tr>
+                <td>Кількість стовбців</td>
+                <td><input type="text" id="t_stb" value="5"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" onClick="buildMatrix();" value="Побудувати матрицю"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="button" onClick="calculateMatrix();" value="Розрахувати"></td>
+            </tr>
+        </table>
+        <br>
+        <div id="main_div"></div>
+    </form>
+
+    <script>
+        let str, stb;
+
+        function buildMatrix() {
+            str = parseInt(document.getElementById("t_str").value);
+            stb = parseInt(document.getElementById("t_stb").value);
+
+            if (isNaN(str) || isNaN(stb) || str <= 0 || stb <= 0) {
+                alert("Будь ласка, введіть коректні додатні числа для кількості рядків і стовпців");
+                return;
+            }
+
+            let res_str = "<table>\n";
+            for (let i = 1; i <= str; i++) {
+                res_str += "<tr>\n";
+                for (let j = 1; j <= stb; j++) {
+                    let val = (2 * j) / (5 * i);
+                    val = Number(val.toFixed(4));
+
+                    res_str += "<td>";
+                    res_str += "<input type=\"text\" id=\"_" + i + "_" + j + "\" value=\"" + val + "\">";
+                    res_str += "</td>\n";
+                }
+                res_str += "</tr>\n";
+            }
+            res_str += "</table>";
+            document.getElementById("main_div").innerHTML = res_str;
+        }
+
+        function calculateMatrix() {
+            if (!str || !stb) {
+                alert("Спочатку побудуйте матрицю!");
+                return;
+            }
+
+            let product = 1;
+            let last_col = stb;
+
+            for (let i = 1; i <= str; i++) {
+                let inputElement = document.getElementById("_" + i + "_" + last_col);
+                if (inputElement) {
+                    let val = parseFloat(inputElement.value);
+                    if (!isNaN(val)) {
+                        product *= val;
+                    }
+                }
+            }
+
+            let str_report = "Добуток елементів останнього (" + last_col + "-го) стовпця = " + product.toFixed(6) + ";\n";
+            alert(str_report);
+        }
+    </script>
+</body>
+</html>

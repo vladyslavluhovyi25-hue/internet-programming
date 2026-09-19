@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab2/lab2.css">
+</head>
+<body onload="clock()">
+    <a class="main-link" href="../index.html">На головну</a>
+
+    <h3>Завдання 1</h3>
+
+    <form>
+        <label for="time" translate="no">Час:</label>
+        <input type="text" name="time" id="clock-input">
+    </form>
+
+    <script>
+        let timeStr, dateStr, clockStr = '';
+
+        function clock() {
+            const now = new Date();
+
+            const day = now.getDate();
+            const month = now.getMonth() + 1;
+            const year = now.getFullYear();
+
+            const hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            dateStr = `${year}-${month}-${day}`;
+            timeStr = `${hours}-${minutes < 10 ? '0' : ''}${minutes}-${seconds < 10 ? '0' : ''}${seconds}`;
+
+            clockStr = `${dateStr}-${timeStr}`;
+
+            document.getElementById('clock-input').value = clockStr;
+
+            setTimeout(() => clock(), 1000);
+        }
+    </script>
+</body>
+</html>

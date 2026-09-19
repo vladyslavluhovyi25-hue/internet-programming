@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 6-7</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab2/lab2.css">
+</head>
+<body>
+    <a class="main-link" href="../index.html">На головну</a>
+
+    <h3>Завдання 6-7</h3>
+
+    <script>
+        const names = ["Alice", "Bob", "Eugene", "John", "Oliver", "Peter", "Yennefer", "Anna", "David"];
+        const vowels = ['a', 'e', 'i', 'o', 'u', 'y'];
+
+        console.log("Спосіб 1: Перевірка першої літери імені");
+
+        names.forEach(name => {
+            const firstLetter = name[0].toLowerCase();
+            
+            if (vowels.includes(firstLetter)) {
+                console.log(`Goodbye ${name}`);
+            } else {
+                console.log(`Hello ${name}`);
+            }
+        });
+
+        /*
+            Для кожного імені обчислюється сума ASCII-кодів усіх його символів через charCodeAt().
+            Якщо сума перевищує поріг (threshold = 400), ім'я вважається довгим і отримує
+            привітання "Welcome to VIP zone", інакше — "Welcome to Standard zone".
+        */
+
+        console.log("\nСпосіб 2: Селекція за сумою ASCII-кодів літер імені");
+
+        const threshold = 400;
+
+        names.forEach(name => {
+            let asciiSum = 0;
+            for (let i = 0; i < name.length; i++) {
+                asciiSum += name.charCodeAt(i);
+            }
+
+            if (asciiSum > threshold) {
+                console.log(`Welcome to VIP zone, ${name}! (ASCII сума: ${asciiSum} > ${threshold})`);
+            } else {
+                console.log(`Welcome to Standard zone, ${name}! (ASCII сума: ${asciiSum} <= ${threshold})`);
+            }
+        });
+    </script>
+</body>
+</html>

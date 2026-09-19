@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab2/lab2.css">
+</head>
+<body>
+    <a class="main-link" href="../index.html">На головну</a>
+
+    <h3>Завдання 4</h3>
+
+    <script>
+        let num1 = 17;
+        let num2 = 5;
+        let remainder = num1 % num2;
+
+        console.log("1. Остача від ділення");
+        console.log("Остача від ділення " + num1 + " на " + num2 + " дорівнює: " + remainder);
+        console.log("Результат через коми:", num1, "%", num2, "=", remainder);
+
+        let a = 10;
+        let b = 4;
+        let isEven = (a % 2 === 0);
+        let isDivisible = (a % b === 0);
+
+        console.log("\n2. Перевірка рівності нулю остачі (true/false)");
+        console.log("Чи є число " + a + " парним (a % 2 === 0)?", isEven);
+        console.log("Чи ділиться " + a + " на " + b + " без остачі (a % b === 0)?", isDivisible);
+
+        let arr = [15, 25, 40, "текстовий елемент"];
+
+        console.log("\n3. Вивід за допомогою керуючих послідовностей");
+        console.log("Числові елементи масиву: %d, %d, %d", arr[0], arr[1], arr[2]);
+
+        console.log("Елементи масиву як рядки: %s та %s", arr[0], arr[3]);
+
+        console.log("Індекс 1 (число): %d | Індекс 3 (рядок): %s", arr[1], arr[3]);
+    </script>
+</body>
+</html>
