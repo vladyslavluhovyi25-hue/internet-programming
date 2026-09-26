@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 5</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab3/lab3.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 5</h3>
+
+    <ul class="task-5-list">
+        <li>
+            <span class="tree-title">fruits:</span>
+            <ol class="nested">
+                <li>apple</li>
+                <li>pineapple</li>
+                <li>appricot</li>
+                <li>pear</li>
+                <li>lemon</li>
+            </ol>
+        </li>
+        <li>
+            <span class="tree-title">vegetables:</span>
+            <ol class="nested">
+                <li>potatoes</li>
+                <li>beetroot</li>
+                <li>carrots</li>
+                <li>pear</li>
+            </ol>
+        </li>
+    </ul>
+
+    <script>
+        const titles = document.querySelectorAll('.tree-title');
+
+        titles.forEach(title => {
+            title.addEventListener('click', () => {
+                const list = title.nextElementSibling;
+
+                if (list) {
+                    list.classList.toggle('hidden');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

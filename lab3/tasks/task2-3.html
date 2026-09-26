@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2-3</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab3/lab3.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 2-3</h3>
+
+    <div class="calculator">
+        <div class="display-container">
+            <div id="history" class="history"></div>
+            <div id="display" class="display">0</div>
+        </div>
+
+        <div id="eng-panel" class="grid-eng hidden">
+            <button class="op calc-button" onclick="calcEng('sqrt')">√</button>
+            <button class="op calc-button" onclick="calcEng('sqr')">x²</button>
+            <button class="op calc-button" onclick="calcEng('sin')">sin</button>
+            <button class="op calc-button" onclick="calcEng('cos')">cos</button>
+        </div>
+
+        <div class="grid">
+            <button class="num calc-button" onclick="pressNum('7')">7</button>
+            <button class="num calc-button" onclick="pressNum('8')">8</button>
+            <button class="num calc-button" onclick="pressNum('9')">9</button>
+            <button class="op calc-button" onclick="pressOp('→')">→</button>
+            <button class="clear calc-button" onclick="clearAll()">C</button>
+
+            <button class="num calc-button" onclick="pressNum('4')">4</button>
+            <button class="num calc-button" onclick="pressNum('5')">5</button>
+            <button class="num calc-button" onclick="pressNum('6')">6</button>
+            <button class="op calc-button" onclick="pressOp('*')">×</button>
+            <button class="op calc-button" onclick="pressOp('/')">÷</button>
+
+            <button class="num calc-button" onclick="pressNum('1')">1</button>
+            <button class="num calc-button" onclick="pressNum('2')">2</button>
+            <button class="num calc-button" onclick="pressNum('3')">3</button>
+            <button class="op calc-button" onclick="pressOp('-')">-</button>
+            <button class="equals calc-button" onclick="calculate()">=</button>
+
+            <button class="op calc-button" onclick="toggleSign()">+/-</button>
+            <button class="num calc-button" onclick="pressNum('0')">0</button>
+            <button class="num calc-button" onclick="pressDot()">.</button>
+            <button class="op calc-button" onclick="pressOp('+')">+</button>
+        </div>
+
+        <button id="toggle-eng" class="toggle-btn" onclick="toggleEngineering()">Переключити на Інженерний</button>
+    </div>
+
+    <script>
+        let currentVal = '0';
+        let prevVal = '';
+        let operation = null;
+        let resetDisplay = false;
+
+        const displayEl = document.getElementById('display');
+        const historyEl = document.getElementById('history');
+
+        function updateDisplay() {
+            displayEl.textContent = currentVal;
+        }
+
+        function pressNum(num) {
+            if (currentVal === '0' || resetDisplay) {
+                currentVal = num;
+                resetDisplay = false;
+            } else {
+                currentVal += num;
+            }
+
+            updateDisplay();
+        }
+
+        function pressDot() {
+            if (resetDisplay) {
+                currentVal = '0.';
+                resetDisplay = false;
+            } else if (!currentVal.includes('.')) {
+                currentVal += '.';
+            }
+            
+            updateDisplay();
+        }
+
+        function pressOp(op) {
+            if (op === '→') {
+                currentVal = currentVal.length > 1 ? currentVal.slice(0, -1) : '0';
+                updateDisplay();
+                return;
+            }
+
+            if (operation && !resetDisplay) {
+                calculate();
+            }
+
+            prevVal = currentVal;
+            operation = op;
+            resetDisplay = true;
+
+            historyEl.textContent = `${prevVal} ${operation}`;
+        }
+
+        function toggleSign() {
+            if (currentVal !== '0') {
+                currentVal = currentVal.startsWith('-') ? currentVal.slice(1) : '-' + currentVal;
+                updateDisplay();
+            }
+        }
+
+        function clearAll() {
+            currentVal = '0';
+            prevVal = '';
+            operation = null;
+
+            historyEl.textContent = '';
+
+            updateDisplay();
+        }
+
+        function calculate() {
+            if (!operation || !prevVal) return;
+
+            let result;
+            const a = parseFloat(prevVal);
+            const b = parseFloat(currentVal);
+
+            switch (operation) {
+                case '+':
+                    result = a + b;
+                    break;
+                case '-':
+                    result = a - b;
+                    break;
+                case '*':
+                    result = a * b;
+                    break;
+                case '/':
+                    result = b !== 0 ? a / b : 'Помилка';
+                    break;
+                default:
+                    console.log('Error occured');
+            }
+
+            historyEl.textContent = `${prevVal} ${operation} ${currentVal} =`;
+
+            currentVal = String(result);
+            operation = null;
+            resetDisplay = true;
+
+            updateDisplay();
+        }
+
+        function calcEng(fn) {
+            let val = parseFloat(currentVal);
+            let res = 0;
+
+            switch (fn) {
+                case 'sqrt':
+                    res = Math.sqrt(val);
+                    break;
+                case 'sqr':
+                    res = Math.pow(val, 2);
+                    break;
+                case 'sin':
+                    res = Math.sin(val);
+                    break;
+                case 'cos':
+                    res = Math.cos(val);
+                    break;
+                default:
+                    console.log('Error occured');
+            }
+
+            historyEl.textContent = `${fn}(${currentVal}) =`;
+
+            currentVal = String(res);
+            resetDisplay = true;
+
+            updateDisplay();
+        }
+
+        function toggleEngineering() {
+            const engPanel = document.getElementById('eng-panel');
+            const toggleBtn = document.getElementById('toggle-eng');
+
+            if (engPanel.classList.contains('hidden')) {
+                engPanel.classList.remove('hidden');
+                toggleBtn.textContent = 'Переключити на Простий';
+            } else {
+                engPanel.classList.add('hidden');
+                toggleBtn.textContent = 'Переключити на Інженерний';
+            }
+        }
+    </script>
+</body>
+</html>

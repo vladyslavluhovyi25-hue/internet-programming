@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab3/lab3.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 4</h3>
+
+    <div class="gallery">
+        <img id="viewer" src="" alt="Галерея">
+        <div class="controls">
+            <button id="prevBtn">Назад</button>
+            <button id="nextBtn">Вперед</button>
+        </div>
+    </div>
+
+    <script>
+        const jsonImages = '["https://picsum.photos/id/10/400/250", "https://picsum.photos/id/20/400/250", "https://picsum.photos/id/30/400/250", "https://picsum.photos/id/40/400/250"]';
+        const images = JSON.parse(jsonImages);
+        let currentIndex = 0;
+
+        const imgEl = document.getElementById('viewer');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+
+        function showImage(index) {
+            imgEl.src = images[index];
+        }
+
+        nextBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % images.length;
+            showImage(currentIndex);
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            showImage(currentIndex);
+        });
+
+        showImage(currentIndex);
+    </script>
+</body>
+</html>

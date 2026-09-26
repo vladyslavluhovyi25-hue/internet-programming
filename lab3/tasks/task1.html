@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab3/lab3.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 1 (Варіант 10)</h3>
+
+    <div class="form-group">
+        <label for="axisA">Піввісь a:</label>
+        <input type="number" id="axisA" value="0" step="any">
+    </div>
+    <div class="form-group">
+        <label for="axisB">Піввісь b:</label>
+        <input type="number" id="axisB" value="0" step="any">
+    </div>
+    <div class="form-group">
+        <label for="area">Площа (S):</label>
+        <input type="text" id="area" readonly>
+    </div>
+
+    <script>
+        const axisAInput = document.getElementById('axisA');
+        const axisBInput = document.getElementById('axisB');
+        const areaInput = document.getElementById('area');
+
+        function calculateEllipseArea() {
+            const a = parseFloat(axisAInput.value);
+            const b = parseFloat(axisBInput.value);
+
+            if (!isNaN(a) && !isNaN(b) && a >= 0 && b >= 0) {
+            const area = Math.PI * a * b;
+            areaInput.value = area.toFixed(2);
+            } else {
+            areaInput.value = 'Помилка введення';
+            }
+        }
+
+        axisAInput.addEventListener('input', calculateEllipseArea);
+        axisBInput.addEventListener('input', calculateEllipseArea);
+
+        calculateEllipseArea();
+    </script>
+</body>
+</html>

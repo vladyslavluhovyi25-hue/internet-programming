@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 6</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab3/lab3.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 6</h3>
+
+    <button id="toggle-state-btn">Перейти в кінцевий стан</button>
+
+    <div class="section">
+        <h3>Завдання 6.1</h3>
+        <p id="date-field">Початковий текст дати</p>
+    </div>
+
+    <div class="section">
+        <h3>Завдання 6.2</h3>
+        <input type="text" id="search-field" placeholder="Початковий підказка...">
+    </div>
+
+    <div class="section">
+        <h3>Завдання 6.3</h3>
+        <div id="banner">Це рекламний баннер (id="banner")</div>
+    </div>
+
+    <script>
+        let isInitialState = true;
+
+        const toggleBtn = document.getElementById('toggle-state-btn');
+        const dateField = document.getElementById('date-field');
+        const searchField = document.getElementById('search-field');
+        const banner = document.getElementById('banner');
+
+        toggleBtn.addEventListener('click', () => {
+            if (isInitialState) {
+                dateField.textContent = 'Дата оновлення: сьогодні';
+
+                searchField.setAttribute('placeholder', 'Введіть ваш пошуковий запит...');
+
+                banner.style.display = 'none';
+
+                setTimeout(() => {
+                    banner.style.display = 'block';
+                }, 4000);
+
+                toggleBtn.textContent = 'Перейти в початковий стан';
+
+                isInitialState = false;
+            } else {
+                dateField.textContent = 'Початковий текст дати';
+                searchField.setAttribute('placeholder', 'Початковий підказка...');
+
+                banner.style.display = 'block';
+
+                toggleBtn.textContent = 'Перейти в кінцевий стан';
+                
+                isInitialState = true;
+            }
+        });
+    </script>
+</body>
+</html>
