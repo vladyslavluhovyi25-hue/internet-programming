@@ -22,8 +22,6 @@ h3 {
     color: #ffffff;
 }
 
-/* ================= Бургер-меню ================= */
-
 .header {
     background-color: #2b303a;
     padding: 10px 20px;
@@ -67,7 +65,6 @@ h3 {
     transition: all 0.3s ease;
 }
 
-/* Анімація Х для гамбургера */
 .burger-btn.active span:nth-child(1) {
     transform: translateY(8.5px) rotate(45deg);
 }
@@ -100,8 +97,6 @@ h3 {
     }
 }
 
-/* ================= Вкладки (Tabs) ================= */
-
 .tabs-container {
     max-width: 800px;
     margin: 0 auto;
@@ -132,7 +127,6 @@ h3 {
     color: #ffffff;
 }
 
-/* Фон активної вкладки співпадає з фоном контейнера нижче */
 .tab-btn.active {
     background-color: #ffffff;
     color: #000000;
@@ -152,8 +146,6 @@ h3 {
 .tab-content.active {
     display: block;
 }
-
-/* ================= Форма тестування ================= */
 
 .question-block {
     margin-bottom: 20px;
@@ -195,8 +187,6 @@ select, input[type="text"] {
 .submit-btn:hover {
     background-color: #414856;
 }
-
-/* ================= Таблиця результатів ================= */
 
 .results-container {
     display: none;
