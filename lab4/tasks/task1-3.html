@@ -28,8 +28,8 @@
 
     <div class="tabs-container">
         <div class="tab-buttons">
-            <button class="tab-btn active" onclick="openTab('testingTab', this)">Тестування</button>
-            <button class="tab-btn" onclick="openTab('theoryTab', this)">Теоретичні відомості</button>
+            <button id="btn1" class="tab-btn active" data-button-id="testingTab" onclick="openTab('btn1')">Тестування</button>
+            <button id="btn2" class="tab-btn" data-button-id="theoryTab" onclick="openTab('btn2')">Теоретичні відомості</button>
         </div>
 
         <div class="tab-content-wrapper">
@@ -144,15 +144,14 @@
             navMenu.classList.toggle('open');
         });
 
-        function openTab(tabId, btn) {
-            const contents = document.querySelectorAll('.tab-content');
-            const buttons = document.querySelectorAll('.tab-btn');
+        function openTab(btnId) {
+            const btn = document.getElementById(btnId);
+            const tabId = btn.dataset.buttonId;
 
-            contents.forEach(content => content.classList.remove('active'));
-            buttons.forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content, .tab-btn').forEach(el => el.classList.remove('active'));
 
-            document.getElementById(tabId).classList.add('active');
             btn.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
         }
 
         function finishTest() {
