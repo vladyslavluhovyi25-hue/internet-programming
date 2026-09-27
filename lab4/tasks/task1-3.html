@@ -53,18 +53,18 @@
                     </div>
 
                     <div class="question-block">
-                        <p><strong>3. Оберіть строкові (inline) елементи HTML (2 правильні відповіді):</strong></p>
-                        <label><input type="checkbox" name="q3" value="1"> &lt;span&gt;</label><br>
-                        <label><input type="checkbox" name="q3" value="1"> &lt;a&gt;</label><br>
-                        <label><input type="checkbox" name="q3" value="-1"> &lt;div&gt;</label><br>
-                        <label><input type="checkbox" name="q3" value="-1"> &lt;p&gt;</label>
+                        <p><strong>3. Оберіть строкові (inline) елементи HTML (2 правильні):</strong></p>
+                        <label><input type="checkbox" name="q3" value="0.5"> &lt;span&gt;</label><br>
+                        <label><input type="checkbox" name="q3" value="0.5"> &lt;a&gt;</label><br>
+                        <label><input type="checkbox" name="q3" value="-0.5"> &lt;div&gt;</label><br>
+                        <label><input type="checkbox" name="q3" value="-0.5"> &lt;p&gt;</label>
                     </div>
 
                     <div class="question-block">
-                        <p><strong>4. Оберіть семантичні теги HTML5 (3 правильні відповіді):</strong></p>
-                        <label><input type="checkbox" name="q4" value="1"> &lt;article&gt;</label><br>
-                        <label><input type="checkbox" name="q4" value="1"> &lt;section&gt;</label><br>
-                        <label><input type="checkbox" name="q4" value="1"> &lt;footer&gt;</label><br>
+                        <p><strong>4. Оберіть семантичні теги HTML5 (3 правильні):</strong></p>
+                        <label><input type="checkbox" name="q4" value="0.333"> &lt;article&gt;</label><br>
+                        <label><input type="checkbox" name="q4" value="0.333"> &lt;section&gt;</label><br>
+                        <label><input type="checkbox" name="q4" value="0.333"> &lt;footer&gt;</label><br>
                         <label><input type="checkbox" name="q4" value="-1"> &lt;bold&gt;</label>
                     </div>
 
@@ -198,6 +198,7 @@
 
                 if (score < 0) score = 0;
                 if (score > 1) score = 1;
+                score = Math.round(score);
 
                 totalScore += score;
 
@@ -214,6 +215,7 @@
                     </tr>`;
             });
 
+            totalScore = Math.round(totalScore * 100) / 100;
             document.getElementById('totalScore').innerHTML = `Загальний бал: <strong>${totalScore}</strong> з 7`;
             document.getElementById('resultsContainer').style.display = 'block';
         }
