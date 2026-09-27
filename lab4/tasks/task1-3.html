@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1-3</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab4/lab4.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 1-3</h3>
+
+    <header class="header">
+        <div class="burger-btn" id="burgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-menu" id="navMenu">
+            <a href="#test">Тестування</a>
+            <a href="#theory">Теорія</a>
+            <a href="#about">Про курс</a>
+            <a href="#contacts">Контакти</a>
+        </nav>
+    </header>
+
+    <div class="tabs-container">
+        <div class="tab-buttons">
+            <button class="tab-btn active" onclick="openTab('testingTab', this)">Тестування</button>
+            <button class="tab-btn" onclick="openTab('theoryTab', this)">Теоретичні відомості</button>
+        </div>
+
+        <div class="tab-content-wrapper">
+            <div id="testingTab" class="tab-content active">
+                <h2>Тест з HTML & CSS</h2>
+                <form id="quizForm">
+                    <div class="question-block">
+                        <p><strong>1. Який тег використовується для створення заголовка першого рівня?</strong></p>
+                        <label><input type="radio" name="q1" value="1"> &lt;h1&gt;</label><br>
+                        <label><input type="radio" name="q1" value="-1"> &lt;head&gt;</label><br>
+                        <label><input type="radio" name="q1" value="-1"> &lt;header&gt;</label><br>
+                        <label><input type="radio" name="q1" value="-1"> &lt;title&gt;</label>
+                    </div>
+
+                    <div class="question-block">
+                        <p><strong>2. Яка CSS-властивість змінює колір тексту?</strong></p>
+                        <label><input type="radio" name="q2" value="-1"> background-color</label><br>
+                        <label><input type="radio" name="q2" value="1"> color</label><br>
+                        <label><input type="radio" name="q2" value="-1"> font-style</label><br>
+                        <label><input type="radio" name="q2" value="-1"> text-align</label>
+                    </div>
+
+                    <div class="question-block">
+                        <p><strong>3. Оберіть строкові (inline) елементи HTML (2 правильні відповіді):</strong></p>
+                        <label><input type="checkbox" name="q3" value="1"> &lt;span&gt;</label><br>
+                        <label><input type="checkbox" name="q3" value="1"> &lt;a&gt;</label><br>
+                        <label><input type="checkbox" name="q3" value="-1"> &lt;div&gt;</label><br>
+                        <label><input type="checkbox" name="q3" value="-1"> &lt;p&gt;</label>
+                    </div>
+
+                    <div class="question-block">
+                        <p><strong>4. Оберіть семантичні теги HTML5 (3 правильні відповіді):</strong></p>
+                        <label><input type="checkbox" name="q4" value="1"> &lt;article&gt;</label><br>
+                        <label><input type="checkbox" name="q4" value="1"> &lt;section&gt;</label><br>
+                        <label><input type="checkbox" name="q4" value="1"> &lt;footer&gt;</label><br>
+                        <label><input type="checkbox" name="q4" value="-1"> &lt;bold&gt;</label>
+                    </div>
+
+                    <div class="question-block">
+                        <p><strong>5. Який атрибут використовується для вказування посилання в тегу &lt;a&gt;?</strong></p>
+                        <select name="q5">
+                            <option value="-1">src</option>
+                            <option value="1">href</option>
+                            <option value="-1">alt</option>
+                            <option value="-1">link</option>
+                        </select>
+                    </div>
+
+                    <div class="question-block">
+                        <p><strong>6. Оберіть CSS-властивості для роботи з Flexbox (2 правильні відповіді, затисніть Ctrl для вибору кількох):</strong></p>
+                        <select name="q6" multiple size="4">
+                            <option value="1">justify-content</option>
+                            <option value="1">align-items</option>
+                            <option value="-1">float</option>
+                            <option value="-1">margin-top</option>
+                        </select>
+                    </div>
+
+                    <div class="question-block">
+                        <p><strong>7. Введіть назву мови стилів, яка розшифровується як Cascading Style Sheets (абревіатура англійською):</strong></p>
+                        <input type="text" id="q7" name="q7" placeholder="Ваша відповідь">
+                    </div>
+
+                    <button type="button" class="submit-btn" onclick="finishTest()">Завершити тестування</button>
+                </form>
+
+                <div id="resultsContainer" class="results-container">
+                    <h3>Результати тестування</h3>
+                    <table class="results-table">
+                        <thead>
+                            <tr>
+                                <th>№</th>
+                                <th>Запитання</th>
+                                <th>Обрані варіанти відповіді</th>
+                                <th>Нараховані бали</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsBody"></tbody>
+                    </table>
+                    <div class="total-score" id="totalScore"></div>
+                </div>
+            </div>
+
+            <div id="theoryTab" class="tab-content">
+                <h2>Теоретичні відомості</h2>
+                <div class="theory-item">
+                    <h3>1. HTML (HyperText Markup Language)</h3>
+                    <p>Стандартна мова розмітки веб-сторінок. Вона описує структуру веб-сторінки за допомогою тегів.</p>
+                </div>
+                <div class="theory-item">
+                    <h3>2. CSS (Cascading Style Sheets)</h3>
+                    <p>Мова стилів, що відповідає за зовнішній вигляд та оформлення HTML-документів (кольори, шрифти, сітки layout).</p>
+                </div>
+                <div class="theory-item">
+                    <h3>3. Семантика HTML5</h3>
+                    <p>Використання семантичних тегів (таких як &lt;header&gt;, &lt;nav&gt;, &lt;article&gt;) покращує доступність сайту та його індексацію пошуковими системами.</p>
+                </div>
+                <div class="theory-item">
+                    <h3>4. Елементи форм</h3>
+                    <p>Форми збирають дані від користувачів через радіокнопки (radio), прапорці (checkbox), поля вибору (select) та текстові поля (input text).</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const burgerBtn = document.getElementById('burgerBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        burgerBtn.addEventListener('click', function() {
+            burgerBtn.classList.toggle('active');
+            navMenu.classList.toggle('open');
+        });
+
+        function openTab(tabId, btn) {
+            const contents = document.querySelectorAll('.tab-content');
+            const buttons = document.querySelectorAll('.tab-btn');
+
+            contents.forEach(content => content.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
+        function finishTest() {
+            const questions = [
+                { id: "q1", title: "1. Який тег використовується для створення заголовка першого рівня?", type: "radio" },
+                { id: "q2", title: "2. Яка CSS-властивість змінює колір тексту?", type: "radio" },
+                { id: "q3", title: "3. Оберіть строкові (inline) елементи HTML", type: "checkbox" },
+                { id: "q4", title: "4. Оберіть семантичні теги HTML5", type: "checkbox" },
+                { id: "q5", title: "5. Який атрибут використовується для вказування посилання в тегу <a>?", type: "select-one" },
+                { id: "q6", title: "6. Оберіть CSS-властивості для роботи з Flexbox", type: "select-multiple" },
+                { id: "q7", title: "7. Назва мови стилів (Cascading Style Sheets)", type: "text" }
+            ];
+
+            const form = document.forms['quizForm'];
+            const tbody = document.getElementById('resultsBody');
+            tbody.innerHTML = '';
+            let totalScore = 0;
+
+            questions.forEach((q, index) => {
+                let score = 0;
+                let selectedTexts = [];
+
+                if (q.type === 'radio' || q.type === 'checkbox') {
+                    const inputs = form.querySelectorAll(`input[name="${q.id}"]:checked`);
+                    inputs.forEach(input => {
+                        score += Number(input.value);
+                        selectedTexts.push(input.labels[0].textContent.trim());
+                    });
+                } 
+                else if (q.type === 'select-one' || q.type === 'select-multiple') {
+                    const select = form[q.id];
+                    Array.from(select.selectedOptions).forEach(option => {
+                        score += Number(option.value);
+                        selectedTexts.push(option.text);
+                    });
+                } 
+                else if (q.type === 'text') {
+                    const val = document.getElementById(q.id).value.trim();
+                    if (val !== "") {
+                        selectedTexts.push(val);
+                        score = (val.toUpperCase() === "CSS") ? 1 : -1;
+                    }
+                }
+
+                if (score < 0) score = 0;
+                if (score > 1) score = 1;
+
+                totalScore += score;
+
+                const answerText = selectedTexts.length > 0 
+                    ? selectedTexts.join(', ').replace(/</g, "&lt;").replace(/>/g, "&gt;") 
+                    : 'Нічого не обрано';
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${q.title.replace(/</g, "&lt;").replace(/>/g, "&gt;")}</td>
+                        <td>${answerText}</td>
+                        <td>${score}</td>
+                    </tr>`;
+            });
+
+            document.getElementById('totalScore').innerHTML = `Загальний бал: <strong>${totalScore}</strong> з 7`;
+            document.getElementById('resultsContainer').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

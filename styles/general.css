@@ -3,3 +3,9 @@
     justify-self: end;
     align-self: start;
 }
+
+ul {
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
