@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 1</h3>
+
+    <script>
+        let s = "dwbyu@mail.ua";
+        let r = /^([a-z0-9]+)(\.[a-z0-9]+)*@([a-z0-9]+)(\.[a-z0-9]+)*$/i;
+        let a = s.match(r);
+
+        if (a) {
+            for (let i = 0; i < a.length; i++) {
+                document.writeln("<hr> a[" + i + "] " + a[i]);
+            }
+        } else {
+            document.writeln("E-mail не відповідає регулярному виразу");
+        }
+    </script>
+</body>
+</html>

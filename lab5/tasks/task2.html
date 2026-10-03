@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2.1 i 2.2</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+    <link rel="stylesheet" href="../../styles/lab5/lab5.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 2.1 i 2.2</h3>
+
+    <form id="registrationForm" novalidate>
+        <div class="form-group">
+            <label for="email">E-mail:</label>
+            <input type="email" id="email" placeholder="example@cnu.edu.ua">
+            <span class="status-msg"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="fullname">Ім'я та прізвище:</label>
+            <input type="text" id="fullname" placeholder="Іван Іваненко">
+            <span class="status-msg"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="login">Логін:</label>
+            <input type="text" id="login" placeholder="userLogin">
+            <span class="status-msg"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Пароль:</label>
+            <input type="password" id="password" placeholder="Мінімум 8 символів">
+            <span class="status-msg"></span>
+        </div>
+
+        <div class="form-group">
+            <label for="zipcode">Поштовий індекс:</label>
+            <input type="text" id="zipcode" placeholder="76000">
+            <span class="status-msg"></span>
+        </div>
+
+        <button type="button" id="submitBtn">Перевірити</button>
+    </form>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', validateForm);
+
+        function validateForm() {
+            const fields = [
+                {
+                    id: 'email',
+                    regex: /^[a-zA-Z0-9._%+-]+@cnu\.edu\.ua$/,
+                    errorMsg: 'Потрібен email у домені pnu.edu.ua (наприклад: user@cnu.edu.ua)'
+                },
+                {
+                    id: 'fullname',
+                    regex: /^[A-Za-zА-Яа-яЁёІіЇїЄєҐґ][a-zа-яёіїєґ]*\s[A-Za-zА-Яа-яЁёІіЇїЄєҐґ]+$/,
+                    errorMsg: '1-е слово: Перша велика, далі маленькі. 2-е слово: Всі великі (напр. Тарас ШЕВЧЕНКО)'
+                },
+                {
+                    id: 'login',
+                    regex: /^[a-zA-Z]+$/,
+                    errorMsg: 'Логін повинен містити лише латинські літери'
+                },
+                {
+                    id: 'password',
+                    regex: /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[_\-!@#$%^&*])[a-zA-Z\d_\-!@#$%^&*]{8,}$/,
+                    errorMsg: 'Мін. 8 символів, містить хоча б 1 букву, 1 цифру та 1 спецсимвол (_-!@#$%^&*)'
+                },
+                {
+                    id: 'zipcode',
+                    regex: /^\d{5}$/,
+                    errorMsg: 'Індекс повинен складатися з 5 цифр'
+                }
+            ];
+
+            fields.forEach(field => {
+                const inputElement = document.getElementById(field.id);
+                const parentGroup = inputElement.parentElement;
+                const statusSpan = parentGroup.querySelector('.status-msg');
+                const value = inputElement.value.trim();
+
+                if (field.regex.test(value)) {
+                    parentGroup.className = 'form-group valid';
+                    statusSpan.className = 'status-msg valid-icon';
+                    statusSpan.textContent = '✔';
+                } else {
+                    parentGroup.className = 'form-group invalid';
+                    statusSpan.className = 'status-msg error-msg';
+                    statusSpan.textContent = field.errorMsg;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

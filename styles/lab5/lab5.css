@@ -1,0 +1,52 @@
+.form-group {
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.form-group label {
+    width: 180px;
+    font-weight: bold;
+}
+
+.form-group input {
+    padding: 8px;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    width: 250px;
+}
+
+.form-group.valid input {
+    border-color: green;
+    color: black;
+}
+
+.status-msg.valid-icon {
+    color: green;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.form-group.invalid input {
+    border-color: red;
+    color: red;
+}
+
+.status-msg.error-msg {
+    color: red;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #218838;
+}
