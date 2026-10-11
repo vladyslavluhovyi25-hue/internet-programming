@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 8</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 8 (Варіант 10)</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <button onclick="getEven()">Отримати</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function getEvenIndexChars(str) {
+            let result = '';
+
+            for (let i = 0; i < str.length; i += 2) {
+                result += str[i];
+            }
+
+            return result;
+        }
+
+        function getEven() {
+            const str = document.getElementById('strInput').value;
+
+            document.getElementById('result').innerText = `Вихід: ${getEvenIndexChars(str)}`;
+        }
+    </script>
+</body>
+</html>

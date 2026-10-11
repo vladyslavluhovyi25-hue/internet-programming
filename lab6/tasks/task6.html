@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 6</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 6</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть текст для перевірки"><br>
+        <button onclick="check()">Перевірити</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function checkSpam(str) {
+            const spamWords = ['100% безкоштовно', 'збільшення продажів', 'тільки сьогодні', 'не видаляйте'];
+            const lowerStr = str.toLowerCase();
+
+            const found = spamWords.find(word => word === lowerStr);
+
+            if (!found) return '';
+
+            return found;
+        }
+
+        function check() {
+            const str = document.getElementById('strInput').value;
+            document.getElementById('result').innerText = `Містить спам: ${checkSpam(str)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 5</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 5</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <button onclick="swap()">Поміняти місцями</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function swapAdjacent(str) {
+            let arr = str.split('');
+
+            for (let i = 0; i < arr.length - 1; i += 2) {
+                let temp = arr[i];
+                arr[i] = arr[i + 1];
+                arr[i + 1] = temp;
+            }
+
+            return arr.join('');
+        }
+
+        function swap() {
+            const str = document.getElementById('strInput').value;
+            document.getElementById('result').innerText = `Вихід: ${swapAdjacent(str)}`;
+        }
+    </script>
+</body>
+</html>

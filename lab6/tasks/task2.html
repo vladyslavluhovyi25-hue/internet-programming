@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 2</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок">
+        <button onclick="changeCase()">Перетворити</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function convertCase(str) {
+            return {
+                upper: str.toUpperCase(),
+                lower: str.toLowerCase()
+            };
+        }
+
+        function changeCase() {
+            const val = document.getElementById('strInput').value;
+            const res = convertCase(val);
+            document.getElementById('result').innerText = `Верхній: ${res.upper}\nНижній: ${res.lower}`;
+        }
+    </script>
+</body>
+</html>

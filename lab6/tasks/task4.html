@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 4</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <input type="text" id="charInput" maxlength="1" placeholder="Символ"><br>
+        <button onclick="countChar()">Порахувати</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function countCharOccurrences(str, char) {
+            if (!char) return 0;
+
+            let count = 0;
+
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === char) count++;
+            }
+            
+            return count;
+        }
+
+        function countChar() {
+            const str = document.getElementById('strInput').value;
+            const char = document.getElementById('charInput').value;
+            
+            document.getElementById('result').innerText = `Кількість входжень: ${countCharOccurrences(str, char)}`;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 3</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <input type="text" id="charInput" maxlength="1" placeholder="Символ"><br>
+        <button onclick="findIndex()">Знайти індекс</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function findCharIndex(str, char) {
+            return str.indexOf(char);
+        }
+
+        function findIndex() {
+            const str = document.getElementById('strInput').value;
+            const char = document.getElementById('charInput').value;
+            document.getElementById('result').innerText = `Індекс: ${findCharIndex(str, char)}`;
+        }
+    </script>
+</body>
+</html>

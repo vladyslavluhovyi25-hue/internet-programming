@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 9</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 9 (Варіант 10)</h3>
+
+    <div class="card">
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <input type="text" id="c1Input" maxlength="1" placeholder="Символ 1"><br>
+        <input type="text" id="c2Input" maxlength="1" placeholder="Символ 2"><br>
+        <button onclick="runSwap()">Замінити</button>
+        <div class="result" id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function swapChars(str, char1, char2) {
+            if (!char1 || !char2) return str;
+
+            let result = '';
+
+            for (let i = 0; i < str.length; i++) {
+                if (str[i] === char1) {
+                    result += char2;
+                } else if (str[i] === char2) {
+                    result += char1;
+                } else {
+                    result += str[i];
+                }
+            }
+
+            return result;
+        }
+
+        function runSwap() {
+            const str = document.getElementById('strInput').value;
+            const c1 = document.getElementById('c1Input').value;
+            const c2 = document.getElementById('c2Input').value;
+
+            document.getElementById('result').innerText = `Вихід: ${swapChars(str, c1, c2)}`;
+        }
+    </script>
+</body>
+</html>

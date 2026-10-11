@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 10</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 10 (Варіант 10)</h3>
+
+    <div class="card">
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <button onclick="findSub()">Знайти підрядок</button>
+        <div class="result" id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function findMaxIdenticalSubstring(str) {
+            if (!str) return false;
+            
+            let maxSub = '';
+            let currentSub = str[0] || '';
+
+            for (let i = 1; i < str.length; i++) {
+                if (str[i] === str[i - 1]) {
+                    currentSub += str[i];
+                } else {
+                    if (currentSub.length >= 3 && currentSub.length > maxSub.length) {
+                        maxSub = currentSub;
+                    }
+
+                    currentSub = str[i];
+                }
+            }
+
+            if (currentSub.length >= 3 && currentSub.length > maxSub.length) {
+                maxSub = currentSub;
+            }
+
+            if (maxSub.length >= 3) {
+                return `true, ${maxSub}`;
+            }
+
+            return 'false';
+        }
+
+        function findSub() {
+            const str = document.getElementById('strInput').value;
+
+            document.getElementById('result').innerText = `Вихід: ${findMaxIdenticalSubstring(str)}`;
+        }
+    </script>
+</body>
+</html>

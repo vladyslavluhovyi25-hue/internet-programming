@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 7</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 7</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок"><br>
+        <input type="number" id="lenInput" placeholder="Максимальна довжина">
+        <br>
+        <button onclick="runTruncate()">Скоротити</button>
+        <div id="result">Результат з'явиться тут</div>
+    </div>
+
+    <script>
+        function truncate(str, maxlength) {
+            if (str.length > maxlength) {
+                return str.slice(0, maxlength - 3) + '...';
+            }
+
+            return str;
+        }
+
+        function runTruncate() {
+            const str = document.getElementById('strInput').value;
+            const maxLen = parseInt(document.getElementById('lenInput').value, 10);
+
+            document.getElementById('result').innerText = `Результат: ${truncate(str, maxLen)}`;
+        }
+    </script>
+</body>
+</html>

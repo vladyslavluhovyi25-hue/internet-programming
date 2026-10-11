@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 1</h3>
+
+    <div>
+        <input type="text" id="strInput" placeholder="Введіть рядок">
+        <button onclick="calcLength()">Обчислити</button>
+        <div id="result">Довжина:</div>
+    </div>
+
+    <script>
+        function getStringLength(str) {
+            return str.length;
+        }
+
+        function calcLength() {
+            const val = document.getElementById('strInput').value;
+            document.getElementById('result').innerText = `Довжина: ${getStringLength(val)}`;
+        }
+    </script>
+</body>
+</html>
