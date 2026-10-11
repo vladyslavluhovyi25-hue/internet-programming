@@ -55,9 +55,7 @@
                 costText.innerText = '';
                 totalText.innerText = '';
 
-                // Перевіряємо, що саме користувач використовував останнім
                 if (productName !== '') {
-                    // Якщо щось введено вручну, шукаємо в масиві
                     for (let i = 0; i < products.length; i++) {
                         if (products[i].toLowerCase() === productName.toLowerCase()) {
                             selectedIndex = i;
@@ -69,7 +67,6 @@
                         productSelect.value = '-1';
                     }
                 } else if (productSelect.value !== '-1') {
-                    // Якщо інпут порожній, берем вибір зі списку
                     selectedIndex = parseInt(productSelect.value);
                 }
 
