@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 4</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 4</h3>
+    <p id="car-info"></p>
+    <p id="car-charge"></p>
+
+    <script>
+        class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+
+            info() {
+                document.getElementById("car-info").textContent = `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+            }
+        }
+
+        class ElectricCar extends Car {
+            constructor(brand, model, year, battery) {
+                super(brand, model, year);
+                this.battery = battery;
+            }
+
+            charge() {
+                document.getElementById("car-charge").textContent = `${this.brand} ${this.model} заряджається... Батарея: ${this.battery} kWh`;
+            }
+        }
+
+        const tesla = new ElectricCar("Tesla", "Model 3", 2022, 75);
+        
+        tesla.info();
+        tesla.charge();
+    </script>
+</body>
+</html>

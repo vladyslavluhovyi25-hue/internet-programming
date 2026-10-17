@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body onload="init()">
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 1</h3>
+
+    <form>
+        <label for="time" translate="no">Час:</label>
+        <input type="text" name="time" id="clock-input" readonly>
+        <input type="number" name="seconds" id="add-seconds-input" placeholder="Введіть кількість секунд">
+        <button onclick="changeTime()" type="button">Змінити час</button>
+    </form>
+
+    <script>
+        const now = new Date();
+        const time = {
+            hours: now.getHours(),
+            minutes: now.getMinutes(),
+            seconds: now.getSeconds()
+        };
+
+        function init() {
+            showTime();
+            setInterval(() => {
+                addSeconds(1);
+            }, 1000);
+        }
+
+        function showTime() {
+            const h = time.hours < 10 ? '0' + time.hours : time.hours;
+            const m = time.minutes < 10 ? '0' + time.minutes : time.minutes;
+            const s = time.seconds < 10 ? '0' + time.seconds : time.seconds;
+
+            document.getElementById('clock-input').value = `${h}:${m}:${s}`;
+        }
+
+        function addSeconds(secToAdd) {
+            time.seconds += secToAdd;
+
+            if (time.seconds >= 60) {
+                time.minutes += Math.floor(time.seconds / 60);
+                time.seconds %= 60;
+            }
+
+            if (time.minutes >= 60) {
+                time.hours += Math.floor(time.minutes / 60);
+                time.minutes %= 60;
+            }
+
+            if (time.hours >= 24) {
+                time.hours %= 24;
+            }
+
+            showTime();
+        }
+
+        function changeTime() {
+            const input = document.getElementById('add-seconds-input');
+            const secondsToAdd = parseInt(input.value, 10);
+
+            if (!isNaN(secondsToAdd) && secondsToAdd > 0) {
+                addSeconds(secondsToAdd);
+                input.value = '';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 3</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 3</h3>
+    <p id="car-info"></p>
+
+    <script>
+        class Car {
+            constructor(brand, model, year) {
+                this.brand = brand;
+                this.model = model;
+                this.year = year;
+            }
+
+            info() {
+                document.getElementById("car-info").textContent = `Авто: ${this.brand} ${this.model}, ${this.year} року.`;
+            }
+        }
+
+        const car1 = new Car("Lexus", "RX 350", 2024);
+
+        car1.info();
+    </script>
+</body>
+</html>

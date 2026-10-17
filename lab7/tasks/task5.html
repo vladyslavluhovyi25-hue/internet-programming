@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 5</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 5</h3>
+
+    <p id="result-text"></p>
+
+    <script>
+        class MathHelper {
+            static add(a, b) {
+                return a + b;
+            }
+        }
+
+        document.getElementById("result-text").textContent = `Результат: ${MathHelper.add(5, 7)}`;
+    </script>
+</body>
+</html>

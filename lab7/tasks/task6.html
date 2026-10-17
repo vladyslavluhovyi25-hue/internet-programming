@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 6</title>
+</head>
+<body>
+
+    <h2>Завдання 6 (Варіант 10)</h2>
+
+    <form id="transport-form">
+        <div class="form-group">
+            <label for="transport-speed">Швидкість звичайного транспорту (км/год):</label>
+            <input type="number" id="transport-speed" placeholder="Введіть швидкість" required>
+        </div>
+
+        <div class="form-group">
+            <label for="car-brand">Марка автомобіля:</label>
+            <input type="text" id="car-brand" placeholder="Наприклад: Audi" required>
+        </div>
+
+        <div class="form-group">
+            <label for="car-speed">Швидкість автомобіля (км/год):</label>
+            <input type="number" id="car-speed" placeholder="Введіть швидкість" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bike-type">Тип велосипеда:</label>
+            <input type="text" id="bike-type" placeholder="Наприклад: Гірський" required>
+        </div>
+
+        <div class="form-group">
+            <label for="bike-speed">Швидкість велосипеда (км/год):</label>
+            <input type="number" id="bike-speed" placeholder="Введіть швидкість" required>
+        </div>
+
+        <div class="buttons">
+            <button type="button" onclick="showInformation()">Показати інформацію</button>
+            <button type="button" onclick="clearFields()">Очистити поля</button>
+        </div>
+    </form>
+
+    <div id="result" class="result-box"></div>
+
+    <script>
+        class Transport {
+            constructor(speed) {
+                this.speed = speed;
+            }
+
+            move() {
+                return `Транспорт рухається зі швидкістю ${this.speed} км/год`;
+            }
+
+            static compareSpeed(t1, t2) {
+                if (t1.speed > t2.speed) {
+                    return `Найшвидший транспорт має швидкість ${t1.speed} км/год`;
+                } else if (t2.speed > t1.speed) {
+                    return `Найшвидший транспорт має швидкість ${t2.speed} км/год`;
+                }
+                return `Обидва види транспорту мають однакову швидкість (${t1.speed} км/год)`;
+            }
+        }
+
+        class Car extends Transport {
+            constructor(speed, brand) {
+                super(speed);
+                this.brand = brand;
+            }
+
+            move() {
+                return `Автомобіль ${this.brand} їде по трасі зі швидкістю ${this.speed} км/год`;
+            }
+        }
+
+        class Bicycle extends Transport {
+            constructor(speed, type) {
+                super(speed);
+                this.type = type;
+            }
+
+            move() {
+                return `${this.type} велосипед їде по велодоріжці зі швидкістю ${this.speed} км/год`;
+            }
+        }
+
+        function showInformation() {
+            const transportSpeed = Number(document.getElementById('transport-speed').value);
+            const carBrand = document.getElementById('car-brand').value;
+            const carSpeed = Number(document.getElementById('car-speed').value);
+            const bikeType = document.getElementById('bike-type').value;
+            const bikeSpeed = Number(document.getElementById('bike-speed').value);
+
+            if (!transportSpeed || !carBrand || !carSpeed || !bikeType || !bikeSpeed) {
+                alert('Будь ласка, заповніть усі поля');
+                return;
+            }
+
+            const vehicles = [
+                new Transport(transportSpeed),
+                new Car(carSpeed, carBrand),
+                new Bicycle(bikeSpeed, bikeType)
+            ];
+
+            let outputHTML = '<h4>Результат виконання:</h4><ul>';
+            vehicles.forEach(vehicle => {
+                outputHTML += `<li>${vehicle.move()}</li>`;
+            });
+            outputHTML += '</ul>';
+
+            const speedComparison = Transport.compareSpeed(vehicles[1], vehicles[2]);
+            outputHTML += `<p><strong>Порівняння Авто та Велосипеда:</strong> ${speedComparison}</p>`;
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = outputHTML;
+            resultDiv.style.display = 'block';
+        }
+
+        function clearFields() {
+            document.getElementById('transport-form').reset();
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '';
+            resultDiv.style.display = 'none';
+        }
+    </script>
+</body>
+</html>

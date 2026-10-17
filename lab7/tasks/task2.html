@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 2</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <h3>Завдання 2</h3>
+
+    <h4>Завдання 2.1: Виведення поточної дати, дня тижня і часу</h4>
+    <div class="task-block">
+        <p>Завдання 2.1. Виведення поточної дати, дня тижня і часу</p>
+        <button onclick="showCurrentDateTime()">Виконати</button>
+        <div id="task1-result" class="result"></div>
+    </div>
+
+    <div class="task-block">
+        <h3>Завдання 2.2. Останній день місяця</h3>
+        <input type="number" id="year-input" placeholder="Рік (напр. 2026)">
+        <input type="number" id="month-input" placeholder="Місяць (1-12)">
+        <button onclick="checkLastDay()">Визначити</button>
+        <div id="task2-result" class="result"></div>
+    </div>
+
+    <div class="task-block">
+        <h3>Завдання 2.3. Секунди дня</h3>
+        <button onclick="showSecondsInfo()">Розрахувати секунди</button>
+        <div id="task3-result" class="result"></div>
+    </div>
+
+    <script>
+        function showCurrentDateTime() {
+            const now = new Date();
+
+            textMonths = [
+                'січня', 'лютого', 'березня', 'квітня', 'травня', 'червня',
+                'липня', 'серпня', 'вересня', 'жовтня', 'листопада', 'грудня'
+            ];
+            const weekDays = [
+                'неділя', 'понеділок', 'вівторок', 'середа',
+                'четвер', 'п\'ятниця', 'субота'
+            ];
+
+            const day = now.getDate();
+            const month = textMonths[now.getMonth()];
+            const year = now.getFullYear();
+            const weekDay = weekDays[now.getDay()];
+
+            const hours = now.getHours().toString().padStart(2, '0');
+            const minutes = now.getMinutes().toString().padStart(2, '0');
+
+            const output = `
+                Дата: ${day} ${month} ${year} року<br>
+                День тижня: ${weekDay}<br>
+                Час: ${hours}:${minutes}
+            `;
+
+            document.getElementById('task1-result').innerHTML = output;
+        }
+
+        function getLastDayOfMonth(year, month) {
+            const date = new Date(year, month, 0);
+            return date.getDate();
+        }
+
+        function checkLastDay() {
+            const year = parseInt(document.getElementById('year-input').value, 10);
+            const month = parseInt(document.getElementById('month-input').value, 10);
+
+            if (isNaN(year) || isNaN(month) || month < 1 || month > 12) {
+                document.getElementById('task2-result').innerText = 'Будь ласка, введіть коректні значення року та місяця (1-12).';
+                return;
+            }
+
+            const lastDay = getLastDayOfMonth(year, month);
+            document.getElementById('task2-result').innerText = `Останній день місяця: ${lastDay}`;
+        }
+
+        function getDaySecondsInfo() {
+            const now = new Date();
+
+            const startOfDay = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+
+            const startOfNextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+
+            const secondsPassed = Math.floor((now - startOfDay) / 1000);
+            const secondsToNextDay = Math.floor((startOfNextDay - now) / 1000);
+
+            return {
+                passed: secondsPassed,
+                left: secondsToNextDay
+            };
+        }
+
+        function showSecondsInfo() {
+            const info = getDaySecondsInfo();
+            console.log('Об\'єкт з секундами:', info);
+
+            document.getElementById('task3-result').innerHTML = `
+                Пройшло від початку дня: ${info.passed} сек.<br>
+                Залишилося до наступного дня: ${info.left} сек.
+            `;
+        }
+    </script>
+</body>
+</html>
