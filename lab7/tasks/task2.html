@@ -11,7 +11,7 @@
 
     <h3>Завдання 2</h3>
 
-    <h4>Завдання 2.1: Виведення поточної дати, дня тижня і часу</h4>
+    <h3>Завдання 2.1: Виведення поточної дати, дня тижня і часу</h4>
     <div class="task-block">
         <p>Завдання 2.1. Виведення поточної дати, дня тижня і часу</p>
         <button onclick="showCurrentDateTime()">Виконати</button>
@@ -62,9 +62,18 @@
             document.getElementById('task1-result').innerHTML = output;
         }
 
-        function getLastDayOfMonth(year, month) {
-            const date = new Date(year, month, 0);
-            return date.getDate();
+        function getLastDayInfo(year, month) {
+            const lastDate = new Date(year, month, 0);
+
+            const daysOfWeek = [
+                'неділя', 'понеділок', 'вівторок', 'середа',
+                'четвер', 'п\'ятниця', 'субота'
+            ];
+
+            const dayNumber = lastDate.getDate();
+            const dayName = daysOfWeek[lastDate.getDay()];
+
+            return `Останній день місяця: ${dayNumber} (${dayName})`;
         }
 
         function checkLastDay() {
@@ -76,7 +85,7 @@
                 return;
             }
 
-            const lastDay = getLastDayOfMonth(year, month);
+            const lastDay = getLastDayInfo(year, month);
             document.getElementById('task2-result').innerText = `Останній день місяця: ${lastDay}`;
         }
 
