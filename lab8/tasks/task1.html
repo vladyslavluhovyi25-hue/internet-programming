@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Завдання 1</title>
+    <link rel="stylesheet" href="../../styles/general.css">
+
+    <style>
+        #train {
+            position: relative;
+            cursor: pointer;
+        }
+
+        progress {
+            width: 5%;
+            cursor: pointer;
+        }
+
+        .container {
+            display: grid;
+            row-gap: 50px;
+        }
+
+        .brick {
+            width: 40px;
+            height: 20px;
+            background: #EE6B47;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .path {
+            outline: 1px solid #E8C48E;
+            width: 540px;
+            height: 20px;
+        }
+    </style>
+</head>
+<body>
+    <a class="main-link" href="../../index.html">На головну</a>
+
+    <div class="container">
+        <h3>Завдання 1</h3>
+
+        <img id="train" src="https://js.cx/clipart/train.gif" alt="train">
+
+        <progress id="elem"></progress>
+
+        <div id="path1" class="path">
+            <div id="brick1" class="brick"></div>
+        </div>
+
+        <div id="path2" class="path">
+            <div id="brick2" class="brick"></div>
+        </div>
+
+        <div id="path3" class="path">
+            <div id="brick3" class="brick"></div>
+        </div>
+
+        <div>
+            <textarea id="textExample" rows="5" cols="60">
+                He took his vorpal sword in hand:
+                Long time the manxome foe he sought—
+                So rested he by the Tumtum tree,
+                And stood awhile in thought.
+            </textarea>
+            <br>
+            <button id="btnText">Run the animated typing!</button>
+        </div>
+    </div>
+
+    <script>
+        const train = document.getElementById('train');
+        train.onclick = function() {
+            let start = Date.now();
+
+            let timer = setInterval(function() {
+                let timePassed = Date.now() - start;
+
+                train.style.left = timePassed / 5 + 'px';
+
+                if (timePassed > 2000) clearInterval(timer);
+            }, 20);
+        };
+
+        function animateScrollbarOne({duration, draw, timing}) {
+            let start = performance.now();
+
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / duration;
+                if (timeFraction > 1) timeFraction = 1;
+
+                let progress = timing(timeFraction);
+
+                draw(progress);
+
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        const elem = document.getElementById('elem');
+        elem.onclick = function() {
+            animateScrollbarOne({
+                duration: 1000,
+                timing: function(timeFraction) {
+                    return timeFraction;
+                },
+                draw: function(progress) {
+                    elem.style.width = progress * 100 + '%';
+                }
+            });
+        };
+
+        function animateNPower(options) {
+            let start = performance.now();
+
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / options.duration;
+                if (timeFraction > 1) timeFraction = 1;
+
+                let progress = options.timing(timeFraction);
+                
+                options.draw(progress);
+
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        const brick1 = document.getElementById('brick1');
+        brick1.onclick = function() {
+            animateNPower({
+                duration: 1000,
+                timing: function(timeFraction) {
+                    return Math.pow(timeFraction, 2);
+                },
+                draw: function(progress) {
+                    brick1.style.left = progress * 500 + 'px';
+                }
+            });
+        };
+
+        function bounce(timeFraction) {
+            for (let a = 0, b = 1; 1; a += b, b /= 2) {
+                if (timeFraction >= (7 - 4 * a) / 11) {
+                    return -Math.pow((11 - 6 * a - 11 * timeFraction) / 4, 2) + Math.pow(b, 2);
+                }
+            }
+        }
+
+        function makeEaseOut(timing) {
+            return function(timeFraction) {
+                return 1 - timing(1 - timeFraction);
+            };
+        }
+
+        function makeEaseInOut(timing) {
+            return function(timeFraction) {
+                if (timeFraction < 0.5)
+                    return timing(2 * timeFraction) / 2;
+                else
+                    return (2 - timing(2 * (1 - timeFraction))) / 2;
+            };
+        }
+
+        function animateReverse(options) {
+            let start = performance.now();
+
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / options.duration;
+                if (timeFraction > 1) timeFraction = 1;
+
+                let progress = options.timing(timeFraction);
+                
+                options.draw(progress);
+
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        const bounceEaseOut = makeEaseOut(bounce);
+        const brick2 = document.getElementById('brick2');
+
+        brick2.onclick = function() {
+            animateReverse({
+                duration: 3000,
+                timing: bounceEaseOut,
+                draw: function(progress) {
+                    brick2.style.left = progress * 500 + 'px';
+                }
+            });
+        };
+
+        function animateEaseInOut(options) {
+            let start = performance.now();
+
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / options.duration;
+                if (timeFraction > 1) timeFraction = 1;
+
+                let progress = options.timing(timeFraction);
+                
+                options.draw(progress);
+
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        const bounceEaseInOut = makeEaseInOut(bounce);
+        const brick3 = document.getElementById('brick3');
+
+        brick3.onclick = function() {
+            animateEaseInOut({
+                duration: 3000,
+                timing: bounceEaseInOut,
+                draw: function(progress) {
+                    brick3.style.left = progress * 500 + 'px';
+                }
+            });
+        };
+
+        function animateText(textArea) {
+            let text = textArea.value;
+            let to = text.length;
+            let from = 0;
+
+            let start = performance.now();
+
+            requestAnimationFrame(function animate(time) {
+                let timeFraction = (time - start) / 5000;
+                if (timeFraction > 1) timeFraction = 1;
+
+                let progress = bounce(timeFraction);
+
+                let result = (to - from) * progress + from;
+                textArea.value = text.slice(0, Math.ceil(result));
+
+                if (timeFraction < 1) {
+                    requestAnimationFrame(animate);
+                }
+            });
+        }
+
+        const textExample = document.getElementById('textExample');
+        const btnText = document.getElementById('btnText');
+
+        btnText.onclick = function() {
+            animateText(textExample);
+        };
+    </script>
+</body>
+</html>

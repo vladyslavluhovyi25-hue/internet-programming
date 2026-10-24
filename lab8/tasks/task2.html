@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <title>Завдання 2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&family=Montserrat:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../styles/general.css">
+  
+  <style>
+    .logo-wrapper {
+      cursor: pointer;
+      padding: 20px;
+      justify-self: start;
+    }
+
+    .circle {
+      width: 240px;
+      height: 240px;
+      background-color: #8F8F8F;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+    }
+
+    .symbol-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 32px;
+      font-weight: 400;
+      color: #000000;
+      user-select: none;
+    }
+
+    .symbol-text span {
+      display: inline-block;
+      opacity: 0;
+    }
+
+    .title-text {
+      font-family: 'Montserrat', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      color: #000000;
+      margin-top: 24px;
+      letter-spacing: 1px;
+      user-select: none;
+    }
+
+    .title-text span {
+      display: inline-block;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <a class="main-link" href="../../index.html">На головну</a>
+
+  <h3>Завдання 2</h3>
+
+  <div class="logo-wrapper" id="logoWrapper">
+    <div class="circle" id="circle">
+      <div class="symbol-text" id="symbolText"></div>
+    </div>
+    <div class="title-text" id="titleText"></div>
+  </div>
+
+  <script>
+    let activeFrameIds = [];
+
+    function animate({duration, timing, draw, onComplete, delay = 0}) {
+      let start = performance.now() + delay;
+
+      function animateFrame(time) {
+        if (time < start) {
+          let id = requestAnimationFrame(animateFrame);
+          activeFrameIds.push(id);
+          return;
+        }
+
+        let timeFraction = (time - start) / duration;
+        if (timeFraction > 1) timeFraction = 1;
+
+        let progress = timing(timeFraction);
+        draw(progress);
+
+        if (timeFraction < 1) {
+          let id = requestAnimationFrame(animateFrame);
+          activeFrameIds.push(id);
+        } else if (onComplete) {
+          onComplete();
+        }
+      }
+
+      let id = requestAnimationFrame(animateFrame);
+      activeFrameIds.push(id);
+    }
+
+    function easeNatural(t) {
+      return Math.sin(t * Math.PI / 2);
+    }
+
+    const logoWrapper = document.getElementById('logoWrapper');
+    const circle = document.getElementById('circle');
+    const symbolTextElem = document.getElementById('symbolText');
+    const titleTextElem = document.getElementById('titleText');
+
+    const rawSymbolText = "</>";
+    const rawTitleText = "SOFTWARE ENGINEERING";
+
+    function prepareSpans(container, text) {
+      container.innerHTML = '';
+      return text.split('').map(char => {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        container.appendChild(span);
+        return span;
+      });
+    }
+
+    const symbolSpans = prepareSpans(symbolTextElem, rawSymbolText);
+    const titleSpans = prepareSpans(titleTextElem, rawTitleText);
+
+    function restartAnimation() {
+      activeFrameIds.forEach(id => cancelAnimationFrame(id));
+      activeFrameIds = [];
+
+      circle.style.transform = 'scale(0)';
+      circle.style.opacity = '0';
+      symbolSpans.forEach(s => s.style.opacity = '0');
+      titleSpans.forEach(s => s.style.opacity = '0');
+
+      animate({
+        duration: 500,
+        timing: easeNatural,
+        draw: function(progress) {
+          circle.style.transform = `scale(${progress})`;
+          circle.style.opacity = progress;
+        },
+        onComplete: function() {
+          animateSymbolText();
+        }
+      });
+    }
+
+    function animateSymbolText() {
+      const durationPerLetter = 120;
+      let currentIndex = 0;
+
+      function animateNextLetter() {
+        if (currentIndex >= symbolSpans.length) {
+          animateTitleText();
+          return;
+        }
+
+        const span = symbolSpans[currentIndex];
+        animate({
+          delay: currentIndex === 0 ? 150 : 0,
+          duration: durationPerLetter,
+          timing: function(t) { return t; },
+          draw: function(progress) {
+            span.style.opacity = progress;
+          },
+          onComplete: function() {
+            currentIndex++;
+            animateNextLetter();
+          }
+        });
+      }
+
+      animateNextLetter();
+    }
+
+    function animateTitleText() {
+      const letterDuration = 500;
+      const staggerDelay = 40;
+
+      titleSpans.forEach((span, index) => {
+        animate({
+          delay: 150 + (index * staggerDelay),
+          duration: letterDuration,
+          timing: function(t) { return t; },
+          draw: function(progress) {
+            span.style.opacity = progress;
+          }
+        });
+      });
+    }
+
+    logoWrapper.onclick = function() {
+      restartAnimation();
+    };
+
+    restartAnimation();
+  </script>
+</body>
+</html>
